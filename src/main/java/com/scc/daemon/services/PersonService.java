@@ -5,12 +5,12 @@ import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.stereotype.Service;
 
-import com.scc.daemon.model.OdsBreeder;
-import com.scc.daemon.model.OdsOwner;
-import com.scc.daemon.model.OdsSyncData;
+import com.scc.daemon.model.Breeder;
+import com.scc.daemon.model.Owner;
+import com.scc.daemon.model.SyncData;
 import com.scc.daemon.repository.OwnerRepository;
 import com.scc.daemon.repository.BreederRepository;
-import com.scc.daemon.repository.OdsDataRepository;
+import com.scc.daemon.repository.SyncDataRepository;
 import com.scc.events.source.SimpleSourceBean;
 
 import java.util.List;
@@ -19,9 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class OdsPersonService {
+public class PersonService {
 
-    private static final Logger logger = LoggerFactory.getLogger(OdsPersonService.class);
+    private static final Logger logger = LoggerFactory.getLogger(PersonService.class);
 
     @Autowired
     private Tracer tracer;
@@ -30,7 +30,7 @@ public class OdsPersonService {
     private SimpleSourceBean simpleSourceBean;
     
     @Autowired
-    private OdsDataRepository odsDataRepository;
+    private SyncDataRepository syncDataRepository;
 
     @Autowired
     private BreederRepository breederRepository;
@@ -38,52 +38,52 @@ public class OdsPersonService {
     @Autowired
     private OwnerRepository ownerRepository;
     
-    public List<OdsSyncData> getAllPersons(){
+    public List<SyncData> getAllPersons(){
 //        Span newSpan = tracer.createSpan("getAllPersons");
-//        logger.debug("In the odsPersonService.getAllPersons() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+//        logger.debug("In the personService.getAllPersons() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
         try {
-        	return odsDataRepository.findByTransfertAndDomaine("N","PERSONNE");
+        	return syncDataRepository.findByTransfertAndDomaine("N","PERSONNE");
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
 
     }
     
-    public OdsSyncData savePerson(OdsSyncData person){
+    public SyncData savePerson(SyncData person){
         Span newSpan = tracer.createSpan("savePerson");
-        logger.debug("In the odsPersonService.savePerson() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the personService.savePerson() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
         
         try {
-        	return odsDataRepository.save(person);
+        	return syncDataRepository.save(person);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	        	
         }
     }
 
-    public List<OdsBreeder> getBreederById(int personId){
+    public List<Breeder> getBreederById(int personId){
         Span newSpan = tracer.createSpan("getBreederById");
-        logger.debug("In the odsPersonService.getBreederById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the personService.getBreederById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return breederRepository.findById(personId);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }
     
-    public void refreshBreeder(List<OdsBreeder> breeders, String action){
+    public void refreshBreeder(List<Breeder> breeders, String action){
         Span newSpan = tracer.createSpan("publishBreederChange");
-        logger.debug("In the odsPersonService.refreshBreeder() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the personService.refreshBreeder() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
@@ -105,31 +105,31 @@ public class OdsPersonService {
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
     
-    public List<OdsOwner> getOwnerById(int personId){
+    public List<Owner> getOwnerById(int personId){
         Span newSpan = tracer.createSpan("getOwnerById");
-        logger.debug("In the odsPersonService.getOwnerById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the personService.getOwnerById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return ownerRepository.findById(personId);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }
     
 
-    public void refreshOwner(List<OdsOwner> owners, String action){
+    public void refreshOwner(List<Owner> owners, String action){
         Span newSpan = tracer.createSpan("publishOwnerChange");
-        logger.debug("In the odsPersonService.refreshOwner() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the personService.refreshOwner() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
@@ -145,22 +145,22 @@ public class OdsPersonService {
 	            		simpleSourceBean.publishOwnerChange("DELETE", owners);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods person service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog person service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
     
-    public void deletePerson (OdsSyncData person) {
+    public void deletePerson (SyncData person) {
         try {
-        	odsDataRepository.delete(person);
+        	syncDataRepository.delete(person);
         }
         finally{
         }

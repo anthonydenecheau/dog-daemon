@@ -10,9 +10,9 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_sync_data")
-@IdClass(OdsSyncDataId.class)
-public class OdsSyncData implements Serializable {
+@Table(name = "ws_dog_sync_data")
+@IdClass(SyncDataId.class)
+public class SyncData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

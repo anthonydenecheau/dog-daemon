@@ -1,16 +1,16 @@
 package com.scc.events.models;
 
-import com.scc.daemon.model.OdsPedigree;
+import com.scc.daemon.model.Pedigree;
 
-public class OdsPedigreeChangeModel {
+public class PedigreeChangeModel {
 
     private String type;
     private String action;
-    private OdsPedigree pedigree;
+    private Pedigree pedigree;
     private String traceId;
     private long timestamp;
 
-    public  OdsPedigreeChangeModel(String type, String action, OdsPedigree pedigree, String traceId, long timestamp) {
+    public  PedigreeChangeModel(String type, String action, Pedigree pedigree, String traceId, long timestamp) {
         super();
         this.type   = type;
         this.action = action;
@@ -25,8 +25,8 @@ public class OdsPedigreeChangeModel {
     public String getAction() { return action;}
     public void setAction(String action) {this.action = action; }
 
-    public OdsPedigree getPedigree() { return pedigree; }
-    public void setPedigree(OdsPedigree pedigree) { this.pedigree = pedigree;}
+    public Pedigree getPedigree() { return pedigree; }
+    public void setPedigree(Pedigree pedigree) { this.pedigree = pedigree;}
 
     public String getTraceId() { return traceId; }
 	public void setTraceId(String traceId) { this.traceId = traceId; }

@@ -3,11 +3,11 @@ package com.scc.daemon.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.scc.daemon.model.OdsTitle;
+import com.scc.daemon.model.Title;
 
 @Repository
-public interface TitleRepository extends CrudRepository<OdsTitle,String>  {
+public interface TitleRepository extends CrudRepository<Title,String>  {
     
-	public OdsTitle findById(long id);
+	public Title findById(long id);
 
 }

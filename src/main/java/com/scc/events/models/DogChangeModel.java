@@ -1,20 +1,20 @@
 package com.scc.events.models;
 
-import com.scc.daemon.model.OdsOwner;
+import com.scc.daemon.model.Dog;
 
-public class OdsOwnerChangeModel {
+public class DogChangeModel {
 
     private String type;
     private String action;
-    private OdsOwner owner;
+    private Dog dog;
     private String traceId;
     private long timestamp;
 
-    public  OdsOwnerChangeModel(String type, String action, OdsOwner owner, String traceId, long timestamp) {
+    public  DogChangeModel(String type, String action, Dog dog, String traceId, long timestamp) {
         super();
         this.type   = type;
         this.action = action;
-        this.owner = owner;
+        this.dog = dog;
         this.traceId = traceId;
         this.timestamp = timestamp;
     }
@@ -25,8 +25,8 @@ public class OdsOwnerChangeModel {
     public String getAction() { return action;}
     public void setAction(String action) {this.action = action; }
 
-    public OdsOwner getOwner() { return owner; }
-    public void setOwner(OdsOwner owner) { this.owner = owner;}
+    public Dog getDog() { return dog; }
+    public void setDog(Dog dog) { this.dog = dog;}
 
     public String getTraceId() { return traceId; }
 	public void setTraceId(String traceId) { this.traceId = traceId; }

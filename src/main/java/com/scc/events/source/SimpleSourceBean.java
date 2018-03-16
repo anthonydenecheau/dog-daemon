@@ -11,19 +11,19 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.support.MessageBuilder;
 
-import com.scc.daemon.model.OdsBreeder;
-import com.scc.daemon.model.OdsDog;
-import com.scc.daemon.model.OdsOwner;
-import com.scc.daemon.model.OdsParent;
-import com.scc.daemon.model.OdsPedigree;
-import com.scc.daemon.model.OdsTitle;
+import com.scc.daemon.model.Breeder;
+import com.scc.daemon.model.Dog;
+import com.scc.daemon.model.Owner;
+import com.scc.daemon.model.Parent;
+import com.scc.daemon.model.Pedigree;
+import com.scc.daemon.model.Title;
 import com.scc.events.CustomChannels;
-import com.scc.events.models.OdsBreederChangeModel;
-import com.scc.events.models.OdsDogChangeModel;
-import com.scc.events.models.OdsOwnerChangeModel;
-import com.scc.events.models.OdsParentChangeModel;
-import com.scc.events.models.OdsPedigreeChangeModel;
-import com.scc.events.models.OdsTitleChangeModel;
+import com.scc.events.models.BreederChangeModel;
+import com.scc.events.models.DogChangeModel;
+import com.scc.events.models.OwnerChangeModel;
+import com.scc.events.models.ParentChangeModel;
+import com.scc.events.models.PedigreeChangeModel;
+import com.scc.events.models.TitleChangeModel;
 
 @EnableBinding(CustomChannels.class)
 public class SimpleSourceBean {
@@ -37,16 +37,16 @@ public class SimpleSourceBean {
     private CustomChannels customChannels;
 
     @SendTo("outboundBreederChanges")
-    public void publishBreederChange(String action, List<OdsBreeder> breeders){
+    public void publishBreederChange(String action, List<Breeder> breeders){
 
     	Instant instant = Instant.now();
     	try {
 	       
-    		for (OdsBreeder breeder : breeders) {
-    	        logger.debug("Sending Kafka message {} for Ods Breeder Id: {} at {} ", action, breeder.toString(), instant);
+    		for (Breeder breeder : breeders) {
+    	        logger.debug("Sending Kafka message {} for dog Breeder Id: {} at {} ", action, breeder.toString(), instant);
 	    
-    	        OdsBreederChangeModel change =  new OdsBreederChangeModel(
-		    		   OdsBreederChangeModel.class.getTypeName(),
+    	        BreederChangeModel change =  new BreederChangeModel(
+		    		   BreederChangeModel.class.getTypeName(),
 		                action,
 		                breeder,
 		                tracer.getCurrentSpan().traceIdString(),
@@ -61,16 +61,16 @@ public class SimpleSourceBean {
     }
 
     @SendTo("outboundOwnerChanges")
-    public void publishOwnerChange(String action, List<OdsOwner> owners){
+    public void publishOwnerChange(String action, List<Owner> owners){
     	Instant instant = Instant.now();
 
     	try {
 	       
-    		for (OdsOwner owner : owners) {
-    	        logger.debug("Sending Kafka message {} for Ods Owner Id: {} at {} ", action, owner.toString(), instant);
+    		for (Owner owner : owners) {
+    	        logger.debug("Sending Kafka message {} for dog Owner Id: {} at {} ", action, owner.toString(), instant);
 
-    	        OdsOwnerChangeModel change =  new OdsOwnerChangeModel(
-		    		   OdsOwnerChangeModel.class.getTypeName(),
+    	        OwnerChangeModel change =  new OwnerChangeModel(
+		    		   OwnerChangeModel.class.getTypeName(),
 		                action,
 		                owner,
 		                tracer.getCurrentSpan().traceIdString(),
@@ -85,14 +85,14 @@ public class SimpleSourceBean {
     }
 
     @SendTo("outboundDogChanges")
-    public void publishDogChange(String action, OdsDog dog){
+    public void publishDogChange(String action, Dog dog){
     	Instant instant = Instant.now();
-        logger.debug("Sending Kafka message {} for Ods Dog Id: {} at {} ", action, dog.toString(), instant);
+        logger.debug("Sending Kafka message {} for dog Id: {} at {} ", action, dog.toString(), instant);
 
     	try {
 	       
-	    	OdsDogChangeModel change =  new OdsDogChangeModel(
-	    		   OdsDogChangeModel.class.getTypeName(),
+	    	DogChangeModel change =  new DogChangeModel(
+	    		   DogChangeModel.class.getTypeName(),
 	                action,
 	                dog,
 	                tracer.getCurrentSpan().traceIdString(),
@@ -107,15 +107,15 @@ public class SimpleSourceBean {
     }
     
     @SendTo("outboundTitleChanges")
-    public void publishTitleChange(String action, OdsTitle title){
+    public void publishTitleChange(String action, Title title){
     	Instant instant = Instant.now();
 
     	try {
     		
-	        logger.debug("Sending Kafka message {} for Ods Dog Id: {} at {} ", action, title.toString(), instant);
+	        logger.debug("Sending Kafka message {} for dog Id: {} at {} ", action, title.toString(), instant);
 	        
-	        OdsTitleChangeModel change =  new OdsTitleChangeModel(
-    			OdsTitleChangeModel.class.getTypeName(),
+	        TitleChangeModel change =  new TitleChangeModel(
+    			TitleChangeModel.class.getTypeName(),
                 action,
                 title,
                 tracer.getCurrentSpan().traceIdString(),
@@ -130,15 +130,15 @@ public class SimpleSourceBean {
     }    
     
     @SendTo("outboundPedigreeChanges")
-    public void publishPedigreeChange(String action, OdsPedigree pedigree){
+    public void publishPedigreeChange(String action, Pedigree pedigree){
     	Instant instant = Instant.now();
 
     	try {
 	       
-	        logger.debug("Sending Kafka message {} for Ods Dog Id: {} at {} ", action, pedigree.toString(), instant);
+	        logger.debug("Sending Kafka message {} for dog Id: {} at {} ", action, pedigree.toString(), instant);
 
-	        OdsPedigreeChangeModel change =  new OdsPedigreeChangeModel(
-	    			OdsPedigreeChangeModel.class.getTypeName(),
+	        PedigreeChangeModel change =  new PedigreeChangeModel(
+	    			PedigreeChangeModel.class.getTypeName(),
 	                action,
 	                pedigree,
 	                tracer.getCurrentSpan().traceIdString(),
@@ -153,15 +153,15 @@ public class SimpleSourceBean {
     }
     
     @SendTo("outboundParentChanges")
-    public void publishParentChange(String action, OdsParent parent){
+    public void publishParentChange(String action, Parent parent){
     	Instant instant = Instant.now();
 
     	try {
 	       
-	        logger.debug("Sending Kafka message {} for Ods Owner Id: {} at {} ", action, parent.toString(), instant);
+	        logger.debug("Sending Kafka message {} for dog Owner Id: {} at {} ", action, parent.toString(), instant);
 
-	        OdsParentChangeModel change =  new OdsParentChangeModel(
-	        		OdsParentChangeModel.class.getTypeName(),
+	        ParentChangeModel change =  new ParentChangeModel(
+	        		ParentChangeModel.class.getTypeName(),
 	                action,
 	                parent,
 	                tracer.getCurrentSpan().traceIdString(),

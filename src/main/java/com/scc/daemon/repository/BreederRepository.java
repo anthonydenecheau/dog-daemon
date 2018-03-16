@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.scc.daemon.model.OdsBreeder;
+import com.scc.daemon.model.Breeder;
 
 @Repository
-public interface BreederRepository extends CrudRepository<OdsBreeder,String>  {
-    public List<OdsBreeder> findById(int id);
-    public OdsBreeder findByIdDog(int idDog);
+public interface BreederRepository extends CrudRepository<Breeder,String>  {
+    public List<Breeder> findById(int id);
+    public Breeder findByIdDog(int idDog);
     
 }

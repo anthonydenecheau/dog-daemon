@@ -1,20 +1,20 @@
 package com.scc.events.models;
 
-import com.scc.daemon.model.OdsTitle;
+import com.scc.daemon.model.Owner;
 
-public class OdsTitleChangeModel {
+public class OwnerChangeModel {
 
     private String type;
     private String action;
-    private OdsTitle title;
+    private Owner owner;
     private String traceId;
     private long timestamp;
 
-    public  OdsTitleChangeModel(String type, String action, OdsTitle title, String traceId, long timestamp) {
+    public  OwnerChangeModel(String type, String action, Owner owner, String traceId, long timestamp) {
         super();
         this.type   = type;
         this.action = action;
-        this.title = title;
+        this.owner = owner;
         this.traceId = traceId;
         this.timestamp = timestamp;
     }
@@ -25,8 +25,8 @@ public class OdsTitleChangeModel {
     public String getAction() { return action;}
     public void setAction(String action) {this.action = action; }
 
-    public OdsTitle getTitle() { return title; }
-    public void setTitle(OdsTitle title) { this.title = title;}
+    public Owner getOwner() { return owner; }
+    public void setOwner(Owner owner) { this.owner = owner;}
 
     public String getTraceId() { return traceId; }
 	public void setTraceId(String traceId) { this.traceId = traceId; }

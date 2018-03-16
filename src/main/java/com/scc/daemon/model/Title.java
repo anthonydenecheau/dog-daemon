@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_titres")
-public class OdsTitle{
+@Table(name = "ws_dog_titres")
+public class Title{
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -58,13 +58,13 @@ public class OdsTitle{
 	public String getObtentionDate() { return obtentionDate; }
 	public void setObtentionDate(String obtentionDate) { this.obtentionDate = obtentionDate; }
 
-	public OdsTitle withId(long id){ this.setId( id ); return this; }
-	public OdsTitle withIdDog(int idDog){ this.setIdDog(idDog); return this; }
-	public OdsTitle withIdTitre(int idTitre){ this.setIdTitre(idTitre); return this; }
-	public OdsTitle withObtentionDate(String obtentionDate){ this.setObtentionDate(obtentionDate); return this; }
-	public OdsTitle withTitle(String title){ this.setTitle(title); return this; }
-	public OdsTitle withName(String name){ this.setName(name); return this; }
-	public OdsTitle withType(String type){ this.setType(type); return this; }
-	public OdsTitle withCountry(String country){ this.setCountry(country); return this; }
+	public Title withId(long id){ this.setId( id ); return this; }
+	public Title withIdDog(int idDog){ this.setIdDog(idDog); return this; }
+	public Title withIdTitre(int idTitre){ this.setIdTitre(idTitre); return this; }
+	public Title withObtentionDate(String obtentionDate){ this.setObtentionDate(obtentionDate); return this; }
+	public Title withTitle(String title){ this.setTitle(title); return this; }
+	public Title withName(String name){ this.setName(name); return this; }
+	public Title withType(String type){ this.setType(type); return this; }
+	public Title withCountry(String country){ this.setCountry(country); return this; }
 	
 }

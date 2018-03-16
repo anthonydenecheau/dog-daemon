@@ -1,20 +1,20 @@
 package com.scc.events.models;
 
-import com.scc.daemon.model.OdsParent;
+import com.scc.daemon.model.Title;
 
-public class OdsParentChangeModel {
+public class TitleChangeModel {
 
     private String type;
     private String action;
-    private OdsParent parent;
+    private Title title;
     private String traceId;
     private long timestamp;
 
-    public  OdsParentChangeModel(String type, String action, OdsParent parent, String traceId, long timestamp) {
+    public  TitleChangeModel(String type, String action, Title title, String traceId, long timestamp) {
         super();
         this.type   = type;
         this.action = action;
-        this.parent = parent;
+        this.title = title;
         this.traceId = traceId;
         this.timestamp = timestamp;
     }
@@ -25,8 +25,8 @@ public class OdsParentChangeModel {
     public String getAction() { return action;}
     public void setAction(String action) {this.action = action; }
 
-    public OdsParent getParent() { return parent; }
-    public void setParent(OdsParent parent) { this.parent = parent;}
+    public Title getTitle() { return title; }
+    public void setTitle(Title title) { this.title = title;}
 
     public String getTraceId() { return traceId; }
 	public void setTraceId(String traceId) { this.traceId = traceId; }

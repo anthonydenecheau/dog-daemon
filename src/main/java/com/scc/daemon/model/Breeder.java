@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_eleveur")
-public class OdsBreeder{
+@Table(name = "ws_dog_eleveur")
+public class Breeder{
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -58,13 +58,13 @@ public class OdsBreeder{
 	public String getOnSuffixe() { return onSuffixe; }
 	public void setOnSuffixe(String onSuffixe) { this.onSuffixe = onSuffixe; }
 
-	public OdsBreeder withId(int id){ this.setId( id ); return this; }
-	public OdsBreeder withLastName(String lastName){ this.setLastName(lastName); return this; }
-	public OdsBreeder withFirstName(String firstName){ this.setFirstName(firstName); return this; }
-	public OdsBreeder withIdDog(int idDog){ this.setIdDog(idDog); return this; }
-	public OdsBreeder withTypeProfil(String typeProfil){ this.setTypeProfil(typeProfil); return this; }
-	public OdsBreeder withsetProfessionnelActif(String professionnelActif){ this.setProfessionnelActif(professionnelActif); return this; }
-	public OdsBreeder withRaisonSociale(String raisonSociale){ this.setRaisonSociale(raisonSociale); return this; }
-	public OdsBreeder withOnSuffixe(String onSuffixe){ this.setOnSuffixe(onSuffixe); return this; }
+	public Breeder withId(int id){ this.setId( id ); return this; }
+	public Breeder withLastName(String lastName){ this.setLastName(lastName); return this; }
+	public Breeder withFirstName(String firstName){ this.setFirstName(firstName); return this; }
+	public Breeder withIdDog(int idDog){ this.setIdDog(idDog); return this; }
+	public Breeder withTypeProfil(String typeProfil){ this.setTypeProfil(typeProfil); return this; }
+	public Breeder withsetProfessionnelActif(String professionnelActif){ this.setProfessionnelActif(professionnelActif); return this; }
+	public Breeder withRaisonSociale(String raisonSociale){ this.setRaisonSociale(raisonSociale); return this; }
+	public Breeder withOnSuffixe(String onSuffixe){ this.setOnSuffixe(onSuffixe); return this; }
 	
 }

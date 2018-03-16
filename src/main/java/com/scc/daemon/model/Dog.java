@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_chien")
-public class OdsDog{
+@Table(name = "ws_dog")
+public class Dog{
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -52,6 +52,9 @@ public class OdsDog{
 	@Column(name = "couleur")
 	private String couleur;
 
+	@Column(name = "couleur_abr")
+	private String couleurAbr;
+
 	@Column(name = "id_etalon")
 	private int idEtalon;
 
@@ -91,6 +94,9 @@ public class OdsDog{
 	public String getCouleur() { return couleur; }
 	public void setCouleur(String couleur) { this.couleur = couleur; }
 
+	public String getCouleurAbr() {return couleurAbr;}
+	public void setCouleurAbr(String couleurAbr) {this.couleurAbr = couleurAbr; }
+
 	public String getCodeFci() { return codeFci; }
 	public void setCodeFci(String codeFci) { this.codeFci = codeFci; }
 	
@@ -106,21 +112,22 @@ public class OdsDog{
 	public int getIdLice() { return idLice;}
 	public void setIdLice(int idLice) { this.idLice = idLice;}
 
-	public OdsDog withId(long id){ this.setId( id ); return this; }
-	public OdsDog withNom(String nom){ this.setNom(nom); return this; }
-	public OdsDog withAffixe(String affixe){ this.setAffixe(affixe); return this; }
-	public OdsDog withSexe(String sexe){ this.setSexe(sexe); return this; }
-	public OdsDog withDateNaissance(String dateNaissance){ this.setDateNaissance(dateNaissance); return this; }
-	public OdsDog withPays(String pays){ this.setPays(pays); return this; }
-	public OdsDog withTatouage(String tatouage){ this.setTatouage(tatouage); return this; }
-	public OdsDog withTranspondeur(String transpondeur){ this.setTranspondeur(transpondeur); return this; }
-	public OdsDog withCodeFci(String codeFci){ this.setCodeFci(codeFci); return this; }
-	public OdsDog withIdRace(int idRace){ this.setIdRace(idRace); return this; }
-	public OdsDog withIdVariete(int idVariete){ this.setIdVariete(idVariete); return this; }
-	public OdsDog withRace(String race){ this.setRace(race); return this; }
-	public OdsDog withVariete(String variete){ this.setVariete(variete); return this; }
-	public OdsDog withCouleur(String couleur){ this.setCouleur(couleur); return this; }
-	public OdsDog withIdLice(int idLice){ this.setIdLice(idLice); return this; }
-	public OdsDog withIdEtalon(int idEtalon){ this.setIdEtalon(idEtalon); return this; }
+	public Dog withId(long id){ this.setId( id ); return this; }
+	public Dog withNom(String nom){ this.setNom(nom); return this; }
+	public Dog withAffixe(String affixe){ this.setAffixe(affixe); return this; }
+	public Dog withSexe(String sexe){ this.setSexe(sexe); return this; }
+	public Dog withDateNaissance(String dateNaissance){ this.setDateNaissance(dateNaissance); return this; }
+	public Dog withPays(String pays){ this.setPays(pays); return this; }
+	public Dog withTatouage(String tatouage){ this.setTatouage(tatouage); return this; }
+	public Dog withTranspondeur(String transpondeur){ this.setTranspondeur(transpondeur); return this; }
+	public Dog withCodeFci(String codeFci){ this.setCodeFci(codeFci); return this; }
+	public Dog withIdRace(int idRace){ this.setIdRace(idRace); return this; }
+	public Dog withIdVariete(int idVariete){ this.setIdVariete(idVariete); return this; }
+	public Dog withRace(String race){ this.setRace(race); return this; }
+	public Dog withVariete(String variete){ this.setVariete(variete); return this; }
+	public Dog withCouleur(String couleur){ this.setCouleur(couleur); return this; }
+	public Dog withCouleurAbr(String couleurAbr){ this.setCouleurAbr(couleurAbr); return this; }
+	public Dog withIdLice(int idLice){ this.setIdLice(idLice); return this; }
+	public Dog withIdEtalon(int idEtalon){ this.setIdEtalon(idEtalon); return this; }
 	
 }

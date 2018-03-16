@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_proprietaire")
-public class OdsOwner{
+@Table(name = "ws_dog_proprietaire")
+public class Owner{
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -58,13 +58,13 @@ public class OdsOwner{
 	public int getIdDog() { return idDog; }
 	public void setIdDog(int idDog) { this.idDog = idDog; }
 
-	public OdsOwner withId(int id){ this.setId( id ); return this; }
-	public OdsOwner withFirstName(String firstName){ this.setFirstName(firstName); return this; }
-	public OdsOwner withLastName(String lastName){ this.setLastName(lastName); return this; }
-	public OdsOwner withAddress(String adress){ this.setAddress(adress); return this; }
-	public OdsOwner withZipCode(String zipCode){ this.setZipCode(zipCode); return this; }
-	public OdsOwner withTown(String town){ this.setTown(town); return this; }
-	public OdsOwner withCountry(String country){ this.setCountry(country); return this; }
-	public OdsOwner withIdDog(int idDog){ this.setIdDog(idDog); return this; }
+	public Owner withId(int id){ this.setId( id ); return this; }
+	public Owner withFirstName(String firstName){ this.setFirstName(firstName); return this; }
+	public Owner withLastName(String lastName){ this.setLastName(lastName); return this; }
+	public Owner withAddress(String adress){ this.setAddress(adress); return this; }
+	public Owner withZipCode(String zipCode){ this.setZipCode(zipCode); return this; }
+	public Owner withTown(String town){ this.setTown(town); return this; }
+	public Owner withCountry(String country){ this.setCountry(country); return this; }
+	public Owner withIdDog(int idDog){ this.setIdDog(idDog); return this; }
 	
 }

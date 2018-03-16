@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_geniteurs")
-public class OdsParent{
+@Table(name = "ws_dog_geniteurs")
+public class Parent{
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -34,9 +34,9 @@ public class OdsParent{
 	public String getOnSuffixe() { return onSuffixe; }
 	public void setOnSuffixe(String onSuffixe) { this.onSuffixe = onSuffixe; }
 
-	public OdsParent withId(int id){ this.setId( id ); return this; }
-	public OdsParent withName(String name){ this.setName(name); return this; }
-	public OdsParent withAffixe(String affixe){ this.setAffixe(affixe); return this; }
-	public OdsParent withOnSuffixe(String onSuffixe){ this.setOnSuffixe(onSuffixe); return this; }
+	public Parent withId(int id){ this.setId( id ); return this; }
+	public Parent withName(String name){ this.setName(name); return this; }
+	public Parent withAffixe(String affixe){ this.setAffixe(affixe); return this; }
+	public Parent withOnSuffixe(String onSuffixe){ this.setOnSuffixe(onSuffixe); return this; }
 	
 }

@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ods_livres")
-public class OdsPedigree{
+@Table(name = "ws_dog_livres")
+public class Pedigree{
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -46,11 +46,11 @@ public class OdsPedigree{
 	public String getObtentionDate() { return obtentionDate; }
 	public void setObtentionDate(String obtentionDate) { this.obtentionDate = obtentionDate; }
 
-	public OdsPedigree withId(long id){ this.setId( id ); return this; }
-	public OdsPedigree withIdDog(int idDog){ this.setIdDog(idDog); return this; }
-	public OdsPedigree withType(String type){ this.setType(type); return this; }
-	public OdsPedigree withNumber(String number){ this.setNumber(number); return this; }
-	public OdsPedigree withCountry(String country){ this.setCountry(country); return this; }
-	public OdsPedigree withObtentionDate(String obtentionDate){ this.setObtentionDate(obtentionDate); return this; }
+	public Pedigree withId(long id){ this.setId( id ); return this; }
+	public Pedigree withIdDog(int idDog){ this.setIdDog(idDog); return this; }
+	public Pedigree withType(String type){ this.setType(type); return this; }
+	public Pedigree withNumber(String number){ this.setNumber(number); return this; }
+	public Pedigree withCountry(String country){ this.setCountry(country); return this; }
+	public Pedigree withObtentionDate(String obtentionDate){ this.setObtentionDate(obtentionDate); return this; }
 	
 }

@@ -1,6 +1,6 @@
-#Default port is 8083
+#Default port is 8084
 server:
-  port: 8083
+  port: 8084
   
 spring:
 #Kafka settings
@@ -8,22 +8,22 @@ spring:
     stream:
       bindings:
         outboundDogChanges:
-            destination:  dogOdsTopic
+            destination:  dogDogTopic
             content-type: application/json
         outboundOwnerChanges:
-            destination:  ownerOdsTopic
+            destination:  ownerDogTopic
             content-type: application/json
         outboundBreederChanges:
-            destination:  breederOdsTopic
+            destination:  breederDogTopic
             content-type: application/json
         outboundTitleChanges:
-            destination:  titleOdsTopic
+            destination:  titleDogTopic
             content-type: application/json
         outboundPedigreeChanges:
-            destination:  pedigreeOdsTopic
+            destination:  pedigreeDogTopic
             content-type: application/json
         outboundParentChanges:
-            destination:  parentOdsTopic
+            destination:  parentDogTopic
             content-type: application/json
       kafka:
         binder:
@@ -36,5 +36,6 @@ logging:
   level:
     com.netflix: WARN
     org.springframework.web: WARN
-    com.scc: DEBUG      
+    com.scc: DEBUG     
+    org.apache.kafka: WARN 
     

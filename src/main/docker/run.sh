@@ -34,4 +34,4 @@ java -Djava.security.egd=file:/dev/./urandom -Dserver.port=$SERVER_PORT   \
      -Dspring.cloud.stream.kafka.binder.zkNodes=$KAFKASERVER_URI          \
      -Dspring.cloud.stream.kafka.binder.brokers=$ZKSERVER_URI             \
      -Dspring.zipkin.baseUrl=$ZIPKIN_URI                                  \
-     -Dspring.profiles.active=$PROFILE -jar /usr/local/onlinedogshowdaemon/@project.build.finalName@.jar
+     -Dspring.profiles.active=$PROFILE -jar /usr/local/dogdaemon/@project.build.finalName@.jar

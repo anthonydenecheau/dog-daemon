@@ -1,6 +1,6 @@
 spring:
   application:
-    name: onlinedogshowdaemon
+    name: dogdaemon
   profiles:
     active:
       default

@@ -5,16 +5,16 @@ import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.stereotype.Service;
 
-import com.scc.daemon.model.OdsBreeder;
-import com.scc.daemon.model.OdsDog;
-import com.scc.daemon.model.OdsOwner;
-import com.scc.daemon.model.OdsParent;
-import com.scc.daemon.model.OdsPedigree;
-import com.scc.daemon.model.OdsSyncData;
-import com.scc.daemon.model.OdsTitle;
+import com.scc.daemon.model.Breeder;
+import com.scc.daemon.model.Dog;
+import com.scc.daemon.model.Owner;
+import com.scc.daemon.model.Parent;
+import com.scc.daemon.model.Pedigree;
+import com.scc.daemon.model.SyncData;
+import com.scc.daemon.model.Title;
 import com.scc.daemon.repository.BreederRepository;
 import com.scc.daemon.repository.DogRepository;
-import com.scc.daemon.repository.OdsDataRepository;
+import com.scc.daemon.repository.SyncDataRepository;
 import com.scc.daemon.repository.OwnerRepository;
 import com.scc.daemon.repository.ParentRepository;
 import com.scc.daemon.repository.PedigreeRepository;
@@ -28,9 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class OdsDogService {
+public class DogService {
 
-    private static final Logger logger = LoggerFactory.getLogger(OdsDogService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DogService.class);
 
     @Autowired
     private Tracer tracer;
@@ -57,65 +57,65 @@ public class OdsDogService {
     private DogRepository dogRepository;
 
     @Autowired
-    private OdsDataRepository odsDataRepository;
+    private SyncDataRepository syncDataRepository;
 
     
-    public List<OdsSyncData> getAllDogs(){
+    public List<SyncData> getAllDogs(){
 //        Span newSpan = tracer.createSpan("getAllDogs");
-//        logger.debug("In the odsDogService.getAllDogs() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+//        logger.debug("In the dogService.getAllDogs() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
         try {
-        	return odsDataRepository.findByTransfertAndDomaine("N","CHIEN");
+        	return syncDataRepository.findByTransfertAndDomaine("N","CHIEN");
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
 
     }
     
-    public List<OdsSyncData> getAllBreeders(){
+    public List<SyncData> getAllBreeders(){
 //        Span newSpan = tracer.createSpan("getAllBreeders");
-//        logger.debug("In the odsDogService.getAllBreeders() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+//        logger.debug("In the dogService.getAllBreeders() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
         try {
-        	return odsDataRepository.findByTransfertAndDomaine("N","ELEVEUR");
+        	return syncDataRepository.findByTransfertAndDomaine("N","ELEVEUR");
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
 
     }
     
-    public List<OdsSyncData> getAllOwners(){
+    public List<SyncData> getAllOwners(){
 //        Span newSpan = tracer.createSpan("getAllOwners");
-//        logger.debug("In the odsDogService.getAllOwners() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+//        logger.debug("In the dogService.getAllOwners() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
         try {
-        	return odsDataRepository.findByTransfertAndDomaine("N","PROPRIETAIRE");
+        	return syncDataRepository.findByTransfertAndDomaine("N","PROPRIETAIRE");
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
 
     }    
     
-    public List<OdsSyncData> getAllTitles(){
+    public List<SyncData> getAllTitles(){
 //        Span newSpan = tracer.createSpan("getAllTitles");
-//        logger.debug("In the odsDogService.getAllTitles() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
-    	List<OdsSyncData> _titles = new ArrayList<OdsSyncData>();
+//        logger.debug("In the dogService.getAllTitles() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+    	List<SyncData> _titles = new ArrayList<SyncData>();
 
         try {
-        	_titles  = odsDataRepository.findByTransfertAndDomaine("N","TITRE_FRANCAIS");
-        	_titles.addAll(odsDataRepository.findByTransfertAndDomaine("N","TITRE_ETRANGER"));
+        	_titles  = syncDataRepository.findByTransfertAndDomaine("N","TITRE_FRANCAIS");
+        	_titles.addAll(syncDataRepository.findByTransfertAndDomaine("N","TITRE_ETRANGER"));
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
@@ -124,67 +124,67 @@ public class OdsDogService {
 
     }    
     
-    public List<OdsSyncData> getAllPedigree(){
+    public List<SyncData> getAllPedigree(){
 //        Span newSpan = tracer.createSpan("getAllPedigree");
-//        logger.debug("In the odsDogService.getAllPedigree() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+//        logger.debug("In the dogService.getAllPedigree() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
         try {
-        	return odsDataRepository.findByTransfertAndDomaine("N","LIVRE");
+        	return syncDataRepository.findByTransfertAndDomaine("N","LIVRE");
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
 
     } 
     
-    public List<OdsSyncData> getAllParent(){
+    public List<SyncData> getAllParent(){
 //        Span newSpan = tracer.createSpan("getAllParent");
-//        logger.debug("In the odsDogService.getAllParent() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+//        logger.debug("In the dogService.getAllParent() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
         try {
-        	return odsDataRepository.findByTransfertAndDomaine("N","GENITEUR");
+        	return syncDataRepository.findByTransfertAndDomaine("N","GENITEUR");
         }
         finally{
-//            newSpan.tag("peer.service", "odsscheduler");
+//            newSpan.tag("peer.service", "dogscheduler");
 //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
 //            tracer.close(newSpan);        	
         }
 
     } 
     
-    public OdsDog getDogById(long dogId){
+    public Dog getDogById(long dogId){
         Span newSpan = tracer.createSpan("getDogById");
-        logger.debug("In the odsDogService.getDogById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.getDogById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return dogRepository.findById(dogId);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }
     
-    public OdsSyncData saveDog(OdsSyncData dog){
+    public SyncData saveDog(SyncData dog){
         Span newSpan = tracer.createSpan("saveDog");
-        logger.debug("In the odsDogService.saveDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.saveDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
         
         try {
-        	return odsDataRepository.save(dog);
+        	return syncDataRepository.save(dog);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	        	
         }
     }
     
-    public void refreshDog(OdsDog dog, String action){
+    public void refreshDog(Dog dog, String action){
         Span newSpan = tracer.createSpan("publishDogChange");
-        logger.debug("In the odsDogService.refreshDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.refreshDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
@@ -200,28 +200,28 @@ public class OdsDogService {
 	            		simpleSourceBean.publishDogChange("DELETE", dog);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods dog service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
     
-    public void refreshBreeder(OdsBreeder dog, String action){
+    public void refreshBreeder(Breeder dog, String action){
         Span newSpan = tracer.createSpan("publishBreederChange");
-        logger.debug("In the odsDogService.refreshBreeder() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.refreshBreeder() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
     		if (dog != null) {
     			
-    			List<OdsBreeder> breeders = new ArrayList<OdsBreeder>();
+    			List<Breeder> breeders = new ArrayList<Breeder>();
     			breeders.add(dog);
     			
 	    		switch(action){
@@ -235,43 +235,43 @@ public class OdsDogService {
 	            		simpleSourceBean.publishBreederChange("DELETE", breeders);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods breeder service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog breeder service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
     
-    public OdsBreeder getBreederByIdDog(int dogId){
+    public Breeder getBreederByIdDog(int dogId){
         Span newSpan = tracer.createSpan("getBreederByIdDog");
-        logger.debug("In the odsDogService.getBreederByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.getBreederByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return breederRepository.findByIdDog(dogId);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }    
     
     
-    public void refreshOwner(OdsOwner dog, String action){
+    public void refreshOwner(Owner dog, String action){
         Span newSpan = tracer.createSpan("publishOwnerChange");
-        logger.debug("In the odsDogService.refreshOwner() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.refreshOwner() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
     		if (dog != null) {
     			
-    			List<OdsOwner> owners = new ArrayList<OdsOwner>();
+    			List<Owner> owners = new ArrayList<Owner>();
     			owners.add(dog);
     			
 	    		switch(action){
@@ -285,36 +285,36 @@ public class OdsDogService {
 	            		simpleSourceBean.publishOwnerChange("DELETE", owners);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods owner service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog owner service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
     
-    public OdsOwner getOwnerByIdDog(int dogId){
+    public Owner getOwnerByIdDog(int dogId){
         Span newSpan = tracer.createSpan("getOwnerByIdDog");
-        logger.debug("In the odsDogService.getOwnerByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.getOwnerByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return ownerRepository.findByIdDog(dogId);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }   
     
-    public void refreshTitle(OdsTitle title, String action){
+    public void refreshTitle(Title title, String action){
         Span newSpan = tracer.createSpan("publishTitleChange");
-        logger.debug("In the odsDogService.refreshTitle() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.refreshTitle() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
@@ -330,36 +330,36 @@ public class OdsDogService {
 	            		simpleSourceBean.publishTitleChange("DELETE", title);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods title service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog title service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
     
-    public OdsTitle getTitleById(long id){
+    public Title getTitleById(long id){
         Span newSpan = tracer.createSpan("getTitleById");
-        logger.debug("In the odsDogService.getTitleById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.getTitleById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return titleRepository.findById(id);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }    
     
-    public void refreshPedigree(OdsPedigree pedigree, String action){
+    public void refreshPedigree(Pedigree pedigree, String action){
         Span newSpan = tracer.createSpan("publishPedigreeChange");
-        logger.debug("In the odsDogService.refreshPedigree() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.refreshPedigree() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
@@ -375,36 +375,36 @@ public class OdsDogService {
 	            		simpleSourceBean.publishPedigreeChange("DELETE", pedigree);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods pedigree service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog pedigree service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
         
-    public OdsPedigree getPedigreeById(long id){
+    public Pedigree getPedigreeById(long id){
         Span newSpan = tracer.createSpan("getPedigreeByIdDog");
-        logger.debug("In the odsDogService.getPedigreeByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.getPedigreeByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return pedigreeRepository.findById(id);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }        
     
-    public void refreshParent(OdsParent dog, String action){
+    public void refreshParent(Parent dog, String action){
         Span newSpan = tracer.createSpan("publishParentChange");
-        logger.debug("In the odsDogService.refreshParent() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.refreshParent() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
     	try {
 
@@ -420,36 +420,36 @@ public class OdsDogService {
 	            		simpleSourceBean.publishParentChange("DELETE", dog);
 	            		break;
 	                default:
-	                    logger.error("Received an UNKNOWN event from the ods pedigree service of type {}", action);
+	                    logger.error("Received an UNKNOWN event from the dog pedigree service of type {}", action);
 	                    break;      
 	    		}
     		}
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);          	
         }
     	
     }
             
-    public OdsParent getParentByIdDog(int dogId){
+    public Parent getParentByIdDog(int dogId){
         Span newSpan = tracer.createSpan("getParentByIdDog");
-        logger.debug("In the odsDogService.getParentByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+        logger.debug("In the dogService.getParentByIdDog() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
     	
         try {
         	return parentRepository.findById(dogId);
         }
         finally{
-            newSpan.tag("peer.service", "odsscheduler");
+            newSpan.tag("peer.service", "dogscheduler");
             newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
             tracer.close(newSpan);        	
         }
     }     
     
-    public void deleteDog (OdsSyncData dog) {
+    public void deleteDog (SyncData dog) {
         try {
-        	odsDataRepository.delete(dog);
+        	syncDataRepository.delete(dog);
         }
         finally{
         }
@@ -458,7 +458,7 @@ public class OdsDogService {
     
     public void syncDogInfos() {
     	
-    	List<OdsSyncData> dogList = new ArrayList<OdsSyncData>();
+    	List<SyncData> dogList = new ArrayList<SyncData>();
     	long idDog = 0;
     	
         try {
@@ -466,26 +466,26 @@ public class OdsDogService {
         	dogList = getAllDogs();
 	    	if (dogList.size() > 0 ) {
 
-	    		Span newSpan = tracer.createSpan("odsScheduler");
-	            logger.debug("In the odsDogService.syncDogInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+	    		Span newSpan = tracer.createSpan("dogscheduler");
+	            logger.debug("In the dogService.syncDogInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
 	    		logger.debug("syncDogInfos :: dogList {}", dogList.size());
 
 	    		// [[Boucle]] s/ le chien
-		    	for (OdsSyncData syncDog : dogList) {
+		    	for (SyncData syncDog : dogList) {
 		    		
 		            try {
 		    				
-		    	    	// 1. Maj du chien de la table (ODS_SYNC_DATA)
+		    	    	// 1. Maj du chien de la table (WS_DOG_SYNC_DATA)
 		    			idDog = syncDog.getId();
 		    			syncDog.setTransfert("O");
 		    			saveDog(syncDog);
 		    			
 		    	    	// 2. Lecture des infos pour le chien à synchroniser 
-		    			// Note : vue ODS_CHIEN (Oracle) == image de la table ODS_CHIEN (PostGRE)
+		    			// Note : vue WS_DOG (Oracle) == image de la table WS_DOG (PostGRE)
 		    			// Si UPDATE/INSERT et dog == null alors le chien n'est pas dans le périmètre -> on le supprime de la liste
 		    			// + DELETE, dog == null -> on publie uniquement l'id à supprimer
-		    			OdsDog dog = new OdsDog();
+		    			Dog dog = new Dog();
 		    			if (!syncDog.getAction().equals("D")) {
 		    				dog = getDogById(idDog);
 		    				if (dog == null ) {
@@ -495,7 +495,7 @@ public class OdsDogService {
 		    			} else
 		    				dog.withId(idDog);	
 		    			
-		    	    	// 3. Envoi du message à ods-service pour maj Postgre
+		    	    	// 3. Envoi du message à dog-service pour maj Postgre
 		    			// Pour le chien lui-même, ses titres, ses livres, ses parents, son proprietaire ?	
 		    			refreshDog(dog, syncDog.getAction());
 		    			
@@ -506,7 +506,7 @@ public class OdsDogService {
 		    	}	    	
 		    	// [[Boucle]]
 		    	
-    			newSpan.tag("peer.service", "odsscheduler");
+    			newSpan.tag("peer.service", "dogscheduler");
     			newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
     			tracer.close(newSpan);		    			
 
@@ -521,7 +521,7 @@ public class OdsDogService {
     
     public void syncBreederInfos() {
 
-    	List<OdsSyncData> dogList = new ArrayList<OdsSyncData>();
+    	List<SyncData> dogList = new ArrayList<SyncData>();
     	int idDog = 0;
     	
         try {
@@ -529,26 +529,26 @@ public class OdsDogService {
 	    	dogList = getAllBreeders();
 	    	if (dogList.size() > 0 ) {
 
-	    		Span newSpan = tracer.createSpan("odsScheduler");
-	            logger.debug("In the odsDogService.syncBreederInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+	    		Span newSpan = tracer.createSpan("dogscheduler");
+	            logger.debug("In the dogService.syncBreederInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
 	    		logger.debug("syncBreederInfos :: dogList {}", dogList.size());
 
 	    		// [[Boucle]] s/ le chien
-		    	for (OdsSyncData syncDog : dogList) {
+		    	for (SyncData syncDog : dogList) {
 
 		            try {
 
-		    	    	// 1. Maj du chien de la table (ODS_SYNC_DATA)
+		    	    	// 1. Maj du chien de la table (WS_DOG_SYNC_DATA)
 		    			idDog = (int) syncDog.getId();
 		    			syncDog.setTransfert("O");
 		    			saveDog(syncDog);
 	
 		    	    	// 2. Lecture des infos pour le chien à synchroniser 
-		    			// Note : vue ODS_ELEVEUR (Oracle) == image de la table ODS_ELEVEUR (PostGRE)
+		    			// Note : vue WS_DOG_ELEVEUR (Oracle) == image de la table WS_DOG_ELEVEUR (PostGRE)
 		    			// Si UPDATE/INSERT et dog == null alors le chien n'est pas dans le périmètre -> on le supprime de la liste
 		    			// + DELETE, dog == null -> on publie uniquement l'id à supprimer
-		    			OdsBreeder breeder = new OdsBreeder();
+		    			Breeder breeder = new Breeder();
 		    			if (!syncDog.getAction().equals("D")) {
 		    				breeder = getBreederByIdDog(idDog);
 		    				if (breeder == null ) {
@@ -558,7 +558,7 @@ public class OdsDogService {
 		    			} else
 		    				breeder.withIdDog(idDog);	
 		    			
-		    	    	// 3. Envoi du message à ods-service pour maj Postgre
+		    	    	// 3. Envoi du message à dog-service pour maj Postgre
 		    			refreshBreeder(breeder, syncDog.getAction());
 		    			
 		    		} catch (Exception e) {
@@ -568,7 +568,7 @@ public class OdsDogService {
 		    	}	    	
 		    	// [[Boucle]]
 
-    			newSpan.tag("peer.service", "odsscheduler");
+    			newSpan.tag("peer.service", "dogscheduler");
     			newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
     			tracer.close(newSpan);		    			
 
@@ -584,7 +584,7 @@ public class OdsDogService {
     
     public void syncOwnerInfos() {
     
-    	List<OdsSyncData> dogList = new ArrayList<OdsSyncData>();
+    	List<SyncData> dogList = new ArrayList<SyncData>();
     	int idDog = 0;
     	
         try {
@@ -592,26 +592,26 @@ public class OdsDogService {
 	    	dogList = getAllOwners();
 	    	if (dogList.size() > 0 ) {
 
-	    		Span newSpan = tracer.createSpan("odsScheduler");
-	            logger.debug("In the odsDogService.syncOwnerInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+	    		Span newSpan = tracer.createSpan("dogscheduler");
+	            logger.debug("In the dogService.syncOwnerInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
 	    		logger.debug("getAllOwners :: dogList {}", dogList.size());
 
 	    		// [[Boucle]] s/ le chien
-		    	for (OdsSyncData syncDog : dogList) {
+		    	for (SyncData syncDog : dogList) {
 
 		            try {
 
-		    	    	// 1. Maj du chien de la table (ODS_SYNC_DATA)
+		    	    	// 1. Maj du chien de la table (WS_DOG_SYNC_DATA)
 		    			idDog = (int) syncDog.getId();
 		    			syncDog.setTransfert("O");
 		    			saveDog(syncDog);
 	
 		    	    	// 2. Lecture des infos pour le chien à synchroniser 
-		    			// Note : vue ODS_PROPRIETAIRE (Oracle) == image de la table ODS_PROPRIETAIRE (PostGRE)
+		    			// Note : vue WS_DOG_PROPRIETAIRE (Oracle) == image de la table WS_DOG_PROPRIETAIRE (PostGRE)
 		    			// Si UPDATE/INSERT et dog == null alors le chien n'est pas dans le périmètre -> on le supprime de la liste
 		    			// + DELETE, dog == null -> on publie uniquement l'id à supprimer
-		    			OdsOwner owner = new OdsOwner();
+		    			Owner owner = new Owner();
 		    			if (!syncDog.getAction().equals("D")) {
 		    				owner = getOwnerByIdDog(idDog);
 		    				if (owner == null ) {
@@ -621,7 +621,7 @@ public class OdsDogService {
 		    			} else
 		    				owner.withId(idDog);	
 		    			
-		    	    	// 3. Envoi du message à ods-service pour maj Postgre
+		    	    	// 3. Envoi du message à dog-service pour maj Postgre
 		    			refreshOwner(owner, syncDog.getAction());
 		    			
 		    		} catch (Exception e) {
@@ -631,7 +631,7 @@ public class OdsDogService {
 		    	}	    	
 		    	// [[Boucle]]
 
-    			newSpan.tag("peer.service", "odsscheduler");
+    			newSpan.tag("peer.service", "dogscheduler");
     			newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
     			tracer.close(newSpan);		    			
 
@@ -646,7 +646,7 @@ public class OdsDogService {
     
     public void syncTitleInfos() {
     	
-    	List<OdsSyncData> titles = new ArrayList<OdsSyncData>();
+    	List<SyncData> titles = new ArrayList<SyncData>();
     	long idTitle = 0;
     	String country ="";
     	
@@ -655,27 +655,27 @@ public class OdsDogService {
         	titles = getAllTitles();
 	    	if (titles.size() > 0 ) {
 
-	    		Span newSpan = tracer.createSpan("odsScheduler");
-	            logger.debug("In the odsDogService.syncTitleInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+	    		Span newSpan = tracer.createSpan("dogscheduler");
+	            logger.debug("In the dogService.syncTitleInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
 	    		logger.debug("getAllTitles :: titles {}", titles.size());
 
 	    		// [[Boucle]] s/ les titres
-		    	for (OdsSyncData syncTitle : titles) {
+		    	for (SyncData syncTitle : titles) {
 
 		            try {
 
-		    	    	// 1. Maj du titre de la table (ODS_SYNC_DATA)
+		    	    	// 1. Maj du titre de la table (WS_DOG_SYNC_DATA)
 		            	idTitle = syncTitle.getId();
 		            	country = (syncTitle.getDomaine().equals("TITRE_FRANCAIS") ? "FR" : "ETR");
 		            	syncTitle.setTransfert("O");
 		    			saveDog(syncTitle);
 	
 		    	    	// 2. Lecture des infos pour le chien à synchroniser 
-		    			// Note : vue ODS_TITRES (Oracle) == image de la table ODS_TITRES (PostGRE)
+		    			// Note : vue WS_DOG_TITRES (Oracle) == image de la table WS_DOG_TITRES (PostGRE)
 		    			// Si UPDATE/INSERT et dog == null alors le chien n'est pas dans le périmètre -> on le supprime de la liste
 		    			// + DELETE, dog == null -> on publie uniquement l'id à supprimer
-		    			OdsTitle title = new OdsTitle();
+		    			Title title = new Title();
 		    			if (!syncTitle.getAction().equals("D")) {
 		    				title = getTitleById(idTitle);
 		    				if (title == null) {
@@ -685,7 +685,7 @@ public class OdsDogService {
 		    			} else
 		    				title.withId(idTitle);	
 		    			
-		    	    	// 3. Envoi du message à ods-service pour maj Postgre
+		    	    	// 3. Envoi du message à dog-service pour maj Postgre
 		    			refreshTitle(title, syncTitle.getAction());
 		    			
 		    		} catch (Exception e) {
@@ -695,7 +695,7 @@ public class OdsDogService {
 		    	}	    	
 		    	// [[Boucle]]
 
-    			newSpan.tag("peer.service", "odsscheduler");
+    			newSpan.tag("peer.service", "dogscheduler");
     			newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
     			tracer.close(newSpan);		    			
 
@@ -710,7 +710,7 @@ public class OdsDogService {
     
     public void syncPedigreeInfos(){
     	
-    	List<OdsSyncData> pedigrees = new ArrayList<OdsSyncData>();
+    	List<SyncData> pedigrees = new ArrayList<SyncData>();
     	long idPedigree = 0;
     	
         try {
@@ -718,26 +718,26 @@ public class OdsDogService {
         	pedigrees = getAllPedigree();
 	    	if (pedigrees.size() > 0 ) {
 
-	    		Span newSpan = tracer.createSpan("odsScheduler");
-	            logger.debug("In the odsDogService.syncPedigreeInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+	    		Span newSpan = tracer.createSpan("dogscheduler");
+	            logger.debug("In the dogService.syncPedigreeInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
 	    		logger.debug("getAllPedigree :: pedigrees {}", pedigrees.size());
 
 	    		// [[Boucle]] s/ le chien
-		    	for (OdsSyncData syncPedigree : pedigrees) {
+		    	for (SyncData syncPedigree : pedigrees) {
 
 		            try {
 
-		    	    	// 1. Maj du chien de la table (ODS_SYNC_DATA)
+		    	    	// 1. Maj du chien de la table (WS_DOG_SYNC_DATA)
 		    			idPedigree = syncPedigree.getId();
 		    			syncPedigree.setTransfert("O");
 		    			saveDog(syncPedigree);
 	
 		    	    	// 2. Lecture des infos pour le chien à synchroniser 
-		    			// Note : vue ODS_LIVRES (Oracle) == image de la table ODS_LIVRES (PostGRE)
+		    			// Note : vue WS_DOG_LIVRES (Oracle) == image de la table WS_DOG_LIVRES (PostGRE)
 		    			// Si UPDATE/INSERT et dog == null alors le chien n'est pas dans le périmètre -> on le supprime de la liste
 		    			// + DELETE, dog == null -> on publie uniquement l'id à supprimer
-		    			OdsPedigree pedigree = new OdsPedigree();
+		    			Pedigree pedigree = new Pedigree();
 		    			if (!syncPedigree.getAction().equals("D")) {
 		    				pedigree = getPedigreeById(idPedigree);
 		    				if (pedigree == null) {
@@ -747,7 +747,7 @@ public class OdsDogService {
 		    			} else
 		    				pedigree.withId(idPedigree);	
 		    			
-		    	    	// 3. Envoi du message à ods-service pour maj Postgre
+		    	    	// 3. Envoi du message à dog-service pour maj Postgre
 		    			refreshPedigree(pedigree, syncPedigree.getAction());
 		    			
 		    		} catch (Exception e) {
@@ -757,7 +757,7 @@ public class OdsDogService {
 		    	}	    	
 		    	// [[Boucle]]
 
-    			newSpan.tag("peer.service", "odsscheduler");
+    			newSpan.tag("peer.service", "dogscheduler");
     			newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
     			tracer.close(newSpan);		    			
 
@@ -773,7 +773,7 @@ public class OdsDogService {
 
     public void syncParentInfos(){
     	
-    	List<OdsSyncData> dogList = new ArrayList<OdsSyncData>();
+    	List<SyncData> dogList = new ArrayList<SyncData>();
     	int idDog = 0;
     	
         try {
@@ -781,26 +781,26 @@ public class OdsDogService {
 	    	dogList = getAllParent();
 	    	if (dogList.size() > 0 ) {
 
-	    		Span newSpan = tracer.createSpan("odsScheduler");
-	            logger.debug("In the odsDogService.syncParentInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+	    		Span newSpan = tracer.createSpan("dogscheduler");
+	            logger.debug("In the dogService.syncParentInfos() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
 	    		logger.debug("getAllParent :: dogList {}", dogList.size());
 
 	    		// [[Boucle]] s/ le chien
-		    	for (OdsSyncData syncDog : dogList) {
+		    	for (SyncData syncDog : dogList) {
 
 		            try {
 
-		    	    	// 1. Maj du chien de la table (ODS_SYNC_DATA)
+		    	    	// 1. Maj du chien de la table (WS_DOG_SYNC_DATA)
 		    			idDog = (int) syncDog.getId();
 		    			syncDog.setTransfert("O");
 		    			saveDog(syncDog);
 	
 		    	    	// 2. Lecture des infos pour le chien à synchroniser 
-		    			// Note : vue ODS_GENITEURS (Oracle) == image de la table ODS_GENITEURS (PostGRE)
+		    			// Note : vue WS_DOG_GENITEURS (Oracle) == image de la table WS_DOG_GENITEURS (PostGRE)
 		    			// Si UPDATE/INSERT et dog == null alors le chien n'est pas dans le périmètre -> on le supprime de la liste
 		    			// + DELETE, dog == null -> on publie uniquement l'id à supprimer
-		    			OdsParent parent = new OdsParent();
+		    			Parent parent = new Parent();
 		    			if (!syncDog.getAction().equals("D")) {
 		    				parent = getParentByIdDog(idDog);
 		    				if (parent == null ) {
@@ -810,7 +810,7 @@ public class OdsDogService {
 		    			} else
 		    				parent.withId(idDog);	
 		    			
-		    	    	// 3. Envoi du message à ods-service pour maj Postgre
+		    	    	// 3. Envoi du message à dog-service pour maj Postgre
 		    			refreshParent(parent, syncDog.getAction());
 		    			
 		    		} catch (Exception e) {
@@ -820,7 +820,7 @@ public class OdsDogService {
 		    	}	    	
 		    	// [[Boucle]]
 
-    			newSpan.tag("peer.service", "odsscheduler");
+    			newSpan.tag("peer.service", "dogscheduler");
     			newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
     			tracer.close(newSpan);		    			
 
