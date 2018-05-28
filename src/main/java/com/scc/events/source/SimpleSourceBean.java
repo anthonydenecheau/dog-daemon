@@ -43,7 +43,7 @@ public class SimpleSourceBean {
     	try {
 	       
     		for (Breeder breeder : breeders) {
-    	        logger.debug("Sending Kafka message {} for dog Breeder Id: {} at {} ", action, breeder.toString(), instant);
+    	        logger.debug("Sending Kafka message {} for Breeder Id: {} at {} ", action, breeder.getId(), instant);
 	    
     	        BreederChangeModel change =  new BreederChangeModel(
 		    		   BreederChangeModel.class.getTypeName(),
@@ -67,7 +67,7 @@ public class SimpleSourceBean {
     	try {
 	       
     		for (Owner owner : owners) {
-    	        logger.debug("Sending Kafka message {} for dog Owner Id: {} at {} ", action, owner.toString(), instant);
+    	        logger.debug("Sending Kafka message {} for Owner Id: {} at {} ", action, owner.getId(), instant);
 
     	        OwnerChangeModel change =  new OwnerChangeModel(
 		    		   OwnerChangeModel.class.getTypeName(),
@@ -87,7 +87,7 @@ public class SimpleSourceBean {
     @SendTo("outboundDogChanges")
     public void publishDogChange(String action, Dog dog){
     	Instant instant = Instant.now();
-        logger.debug("Sending Kafka message {} for dog Id: {} at {} ", action, dog.toString(), instant);
+        logger.debug("Sending Kafka message {} for Dog Id: {} at {} ", action, dog.getId(), instant);
 
     	try {
 	       
@@ -112,7 +112,7 @@ public class SimpleSourceBean {
 
     	try {
     		
-	        logger.debug("Sending Kafka message {} for dog Id: {} at {} ", action, title.toString(), instant);
+	        logger.debug("Sending Kafka message {} for Title Id: {} at {} ", action, title.getId(), instant);
 	        
 	        TitleChangeModel change =  new TitleChangeModel(
     			TitleChangeModel.class.getTypeName(),
@@ -135,7 +135,7 @@ public class SimpleSourceBean {
 
     	try {
 	       
-	        logger.debug("Sending Kafka message {} for dog Id: {} at {} ", action, pedigree.toString(), instant);
+	        logger.debug("Sending Kafka message {} for Pedigree Id: {} at {} ", action, pedigree.getId(), instant);
 
 	        PedigreeChangeModel change =  new PedigreeChangeModel(
 	    			PedigreeChangeModel.class.getTypeName(),
@@ -158,7 +158,7 @@ public class SimpleSourceBean {
 
     	try {
 	       
-	        logger.debug("Sending Kafka message {} for dog Owner Id: {} at {} ", action, parent.toString(), instant);
+	        logger.debug("Sending Kafka message {} for Parent Id: {} at {} ", action, parent.getId(), instant);
 
 	        ParentChangeModel change =  new ParentChangeModel(
 	        		ParentChangeModel.class.getTypeName(),

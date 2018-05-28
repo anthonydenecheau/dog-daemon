@@ -17,7 +17,7 @@ public class Title{
 	private int idDog;
 
 	@Column(name = "id_titre", nullable = false)
-	private int idTitre;
+	private int idTitle;
 
 	@Column(name = "code")
 	private String title;
@@ -40,8 +40,8 @@ public class Title{
 	public int getIdDog() { return idDog; }
 	public void setIdDog(int idDog) { this.idDog = idDog; }
 
-	public int getIdTitre() { return idTitre;}
-	public void setIdTitre(int idTitre) { this.idTitre = idTitre;}
+	public int getIdTitle() { return idTitle;}
+	public void setIdTitle(int idTitle) { this.idTitle = idTitle;}
 
 	public String getTitle() { return title; }
 	public void setTitle(String title) { this.title = title; }
@@ -60,7 +60,7 @@ public class Title{
 
 	public Title withId(long id){ this.setId( id ); return this; }
 	public Title withIdDog(int idDog){ this.setIdDog(idDog); return this; }
-	public Title withIdTitre(int idTitre){ this.setIdTitre(idTitre); return this; }
+	public Title withIdTitle(int idTitle){ this.setIdTitle(idTitle); return this; }
 	public Title withObtentionDate(String obtentionDate){ this.setObtentionDate(obtentionDate); return this; }
 	public Title withTitle(String title){ this.setTitle(title); return this; }
 	public Title withName(String name){ this.setName(name); return this; }

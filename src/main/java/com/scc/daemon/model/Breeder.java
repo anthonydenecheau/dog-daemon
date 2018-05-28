@@ -13,6 +13,9 @@ public class Breeder{
 	@Column(name = "id", nullable = false)
 	private int id;
 
+	@Column(name = "civilite")
+	private String civility;
+
 	@Column(name = "nom")
 	private String lastName;
 
@@ -40,6 +43,9 @@ public class Breeder{
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 
+	public String getCivility() { return civility; }
+	public void setCivility(String civility) { this.civility = civility; }
+
 	public String getFirstName() { return firstName; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }
 	
@@ -65,6 +71,7 @@ public class Breeder{
 	public void setOnSuffixe(String onSuffixe) { this.onSuffixe = onSuffixe; }
 
 	public Breeder withId(int id){ this.setId( id ); return this; }
+	public Breeder withCivility(String civility){ this.setCivility(civility); return this; }
 	public Breeder withLastName(String lastName){ this.setLastName(lastName); return this; }
 	public Breeder withFirstName(String firstName){ this.setFirstName(firstName); return this; }
 	public Breeder withIdDog(int idDog){ this.setIdDog(idDog); return this; }
