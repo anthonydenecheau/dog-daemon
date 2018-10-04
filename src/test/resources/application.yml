@@ -1,0 +1,49 @@
+eureka:
+  client:
+    enabled: false  
+
+spring:
+  jpa:
+    properties:
+      hibernate:  
+        dialect: "org.hibernate.dialect.H2Dialect"
+  datasource:
+    url: jdbc:h2:mem:db;Mode=Oracle
+    username: sa  
+    password: sa
+    platform: h2
+    continue-on-error: true
+#Kafka settings
+  cloud:
+    stream:
+      bindings:
+        outboundDogChanges:
+            destination:  dogDogTopic
+            content-type: application/json
+        outboundOwnerChanges:
+            destination:  ownerDogTopic
+            content-type: application/json
+        outboundBreederChanges:
+            destination:  breederDogTopic
+            content-type: application/json
+        outboundTitleChanges:
+            destination:  titleDogTopic
+            content-type: application/json
+        outboundPedigreeChanges:
+            destination:  pedigreeDogTopic
+            content-type: application/json
+        outboundParentChanges:
+            destination:  parentDogTopic
+            content-type: application/json
+      kafka:
+        binder:
+          zkNodes: localhost
+          brokers: localhost
+          autoCreateTopics: true
+          
+example:
+  property: "I AM IN THE DEFAULT"
+
+fixedDelay:
+  in:
+    milliseconds : "30000"

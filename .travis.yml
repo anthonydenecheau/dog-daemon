@@ -15,12 +15,24 @@ notifications:
   on_success: always
   on_failure: always
 env:
-  global: 
+  global:
   - secure: LXAZ4Nqqoh/IeRpPMelt1ao5LzKu1nwmezw1Y0UcSk5GL0XGQJ0rOOaWEvtqefhBy9dnuZp9k5Rc9b/v68gfSqDO+tUrdv2ahu6WGgoPHwC4HJXKIZGmtEz6uHl+7gcd+9a5NK9PikhDkFaIuUMlhaEg/S79W4avQprh1y3kXMmu8jft3h6MeaNPmpLC/mACBH+hQ1a15nYpkGwUXYRPGwff6HfZzA+0FOtQdEFifK/Tu+zHH8RtagZcaHE6ONCESIGZzT3wU5Ak2eIWXUtKS6ssgZYlJmpHUfyPV65NX5EtHa8XrUPQ/xuTftXwpbGbg0qMWFa9PE8yOu1dU8Z+ef6h3/BxjVd0HdFoV2j+ynHKlnhuWK35pNyIynq63AP3VXf9LzvFxeVbYbaRaWHJC9eu98xAa24NFUUUVIDIpI1eMH+6nCmDudyhdQxuYyZx/iYsdtmk5A+LoaReSsVR9UIeok5iTNBI8Xtut9J50grbw+fe8/BhoMe8G/v2y63WqazXkVBsAX0YL5fFwEeoIFyhRQqlHxlYyYGL9EbeLZmMUp84FKHDIHnjiea4H19Yl1hwyLXbmO5Z5udDAM1Fcppi1QPAh9MZkXEbQptPWQceP67MlXIPw1BCz46zC9xGHB/BqlssJpMjKmNrtv/VUZQ/RRIcOxYuOTC+38hiLfM=
   - secure: USAI3BcFdbZeAtLBtNbzFK9dMzNAybG70T1hC3j9GkmoCyRoBmRnKIepqsHjnEGNL1O7271zDRlocbozDTrX3Pk1Cs8IBQuZDoRiNV3ZRFQ+pOdEAQEPXheyarakWqU527sGopeZuCTJt7EmfWDzFh1Seg1CFyZ8epij83J9yZWhUy4zMmTzMR0F5UPc3o27dpUCxZepnHnWrphAe2jiz5bo7tR8diPoMedkCdrvVgTcy0J7UTsLZboFVqbMbY6wTxY/t5XpPIzdlgZmtxzxLoTSODWg+Z+C8EoazBnOOa1vTxpl+Ey0IdoHuqpok251tlolz1CF5zWzQzdowpZkInLvJB1JI4v/slYi0wo2e1GmsSftvm9wIJ4IiycHOOPmb6ZT2hxJ/o5q7F87UwDSDcH8fvKhLTTinHv8S+m/0xogY1dkxjMCd305+tO9GWQ7nszFS9HfRH6GIcOdaiMead6usSlHehJPcX1pBU9dfe2DVgc7+h+RLnyJtgBUD4+Xs4KfURM+TdyE4Whrs+od60TT1T4xOpm9vUUiBN00eD/GW52tDX01DQflK5Bel+YZaPuIdkLmcx3RaVP0UDlBrFb72MD6NGIWvt+nygyCM1sX3fnQS2SOXVDoJ7KRIyxF70h+AAxSnXdGm0TEl8igxNmeXszmgqH1cp3KefXSTYI=
-  matrix:
-  - SCC_DOCKER_IMAGE=anthonydenecheau/scc-dog-daemon:version1.0
+  - secure: Z8ZRAMwfLPzDnbbSAYPnj+z45oEgFRgUZn2FEHLWkNOK4Tl9aBKLevlyPnJ5xNtZPk9zdvpg+2F8wkp+jfUN3T8dAsHkg9dV+qMvuRuYAE+p/Z2n+NngFqFEHuZlh+5WSAU3PCBwkUsDVpUzlxLgngkaJn2lGwjNi7Dq9gtmGJdXbr2QRWixcYw1412Eo7nbcTc1MYXJvcjBIY8LIbVGOE/mGla/ij5HN1Drivo0FRBWcw+Wm2Mk9QtaZ2buI3SZ7a92RfubyFSpLpe05h9KZLHLtmiDO+ruVQn2olGcHTx7B1x84qX55MHnkCTqomG26FMkc0AJiJJqOedU8dyL3WUIlnQCWWhWWgdc/cmaGnAsO647sz+GwH3hbozQgZY3kF284s+SvF+LjTq2vvaVoqmraFAzG01Cg7ppgjaJNiVVI1zdbr/1Lk05UCg4j+hCvKrfPJ9cdF5UBxmRbFybixOD+g7rpX/F+du+eNPBbUWnKZpY3/3bzXHNrQ0B24lw6VG4sEhupZpOjMMWO88bHED4EEw/xEnbUV8KR2/BoCqBnO8URwabHwjsfYhW+FA0sNl+Y1B6RkCJYCq4+iYXBZBMryBw/Jr28PE0Pz9RusFd5aEDeaNKIgW0gTIDzrU75ps9QqHxHoje1Jjdj9LL9Hk6Z0nOsOkbPDdev05NgDY=
+before_install:
+- gem install travis -v 1.8.5 --no-rdoc --no-ri
+- export BUILD_NAME=scc-dog-daemon-$TRAVIS_BRANCH-$(date -u "+%Y%m%d%H%M%S")-$TRAVIS_BUILD_NUMBER
+- wget https://archive.apache.org/dist/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz -O kafka.tgz
+- mkdir -p kafka && tar xzf kafka.tgz -C kafka --strip-components 1
+- echo "auto.create.topics.enable=true" >> kafka/config/server.properties
+- nohup bash -c "cd kafka && bin/zookeeper-server-start.sh config/zookeeper.properties
+  &"
+- sleep 10
+- nohup bash -c "cd kafka && bin/kafka-server-start.sh config/server.properties &"
+- sleep 10
+- kafka/bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --create --topic kafka-test-topic
+  --partitions 3 --replication-factor 1
 script:
-- docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-- mvn clean package docker:build
-- docker push $SCC_DOCKER_IMAGE
+- sh scripts/travis/tag_build.sh
+- sh scripts/travis/build_services.sh
+- sh scripts/travis/deploy_to_docker_hub.sh
