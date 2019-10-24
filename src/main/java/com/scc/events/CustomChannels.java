@@ -4,23 +4,23 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.SubscribableChannel;
 
 public interface CustomChannels {
-	
-    @Output("outboundDogChanges")
-    SubscribableChannel outputDog();
 
-    @Output("outboundOwnerChanges")
-    SubscribableChannel outputOwner();
+   @Output("outboundDogChanges")
+   SubscribableChannel outputDog();
 
-    @Output("outboundBreederChanges")
-    SubscribableChannel outputBreeder();
+   @Output("outboundOwnerChanges")
+   SubscribableChannel outputOwner();
 
-    @Output("outboundTitleChanges")
-    SubscribableChannel outputTitle();
+   @Output("outboundBreederChanges")
+   SubscribableChannel outputBreeder();
 
-    @Output("outboundPedigreeChanges")
-    SubscribableChannel outputPedigree();
+   @Output("outboundTitleChanges")
+   SubscribableChannel outputTitle();
 
-    @Output("outboundParentChanges")
-    SubscribableChannel outputParent();
+   @Output("outboundPedigreeChanges")
+   SubscribableChannel outputPedigree();
+
+   @Output("outboundParentChanges")
+   SubscribableChannel outputParent();
 
 }
