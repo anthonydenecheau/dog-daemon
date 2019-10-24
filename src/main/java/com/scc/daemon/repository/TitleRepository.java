@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.scc.daemon.model.Title;
 
 @Repository
-public interface TitleRepository extends CrudRepository<Title,String>  {
-    
-	public Title findById(long id);
+public interface TitleRepository extends CrudRepository<Title, String> {
+
+   public Title findById(long id);
 
 }

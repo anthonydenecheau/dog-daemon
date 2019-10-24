@@ -21,148 +21,140 @@ import org.slf4j.LoggerFactory;
 @Service
 public class PersonService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PersonService.class);
+   private static final Logger logger = LoggerFactory.getLogger(PersonService.class);
 
-    @Autowired
-    private Tracer tracer;
-    
-    @Autowired
-    private SimpleSourceBean simpleSourceBean;
-    
-    @Autowired
-    private SyncDataRepository syncDataRepository;
-   
-    @Autowired
-    private BreederRepository breederRepository;
+   @Autowired
+   private Tracer tracer;
 
-    @Autowired
-    private OwnerRepository ownerRepository;
-    
-    public List<SyncData> getAllPersons(){
-//        Span newSpan = tracer.createSpan("getAllPersons");
-//        logger.debug("In the personService.getAllPersons() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+   @Autowired
+   private SimpleSourceBean simpleSourceBean;
 
-        try {
-        	return syncDataRepository.findByTransfertAndDomaine("N","PERSONNE");
-        }
-        finally{
-//            newSpan.tag("peer.service", "dogscheduler");
-//            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
-//            tracer.close(newSpan);        	
-        }
+   @Autowired
+   private SyncDataRepository syncDataRepository;
 
-    }
-    
-    public SyncData savePerson(SyncData person){
-        Span newSpan = tracer.createSpan("savePerson");
-        logger.debug("In the personService.savePerson() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
-        
-        try {
-        	return syncDataRepository.save(person);
-        }
-        finally{
-            newSpan.tag("peer.service", "dogscheduler");
-            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
-            tracer.close(newSpan);        	        	
-        }
-    }
+   @Autowired
+   private BreederRepository breederRepository;
 
-    public List<Breeder> getBreederById(int personId){
-        Span newSpan = tracer.createSpan("getBreederById");
-        logger.debug("In the personService.getBreederById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
-    	
-        try {
-        	return breederRepository.findById(personId);
-        }
-        finally{
-            newSpan.tag("peer.service", "dogscheduler");
-            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
-            tracer.close(newSpan);        	
-        }
-    }
-    
-    public void refreshBreeder(List<Breeder> breeders, String action){
-        Span newSpan = tracer.createSpan("publishBreederChange");
-        logger.debug("In the personService.refreshBreeder() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
-    	
-    	try {
+   @Autowired
+   private OwnerRepository ownerRepository;
 
-    		if (breeders != null && breeders.size()>0) {
-	    		switch(action){
-	            	case "U":
-	            		simpleSourceBean.publishBreederChange("UPDATE", breeders);
-	            		break;
-	            	case "I":
-	            		simpleSourceBean.publishBreederChange("SAVE", breeders);
-	            		break;
-	            	case "D":
-	            		simpleSourceBean.publishBreederChange("DELETE", breeders);
-	            		break;
-	                default:
-	                    logger.error("Received an UNKNOWN event from the agria service of type {}", action);
-	                    break;      
-	    		}
-    		}
-        }
-        finally{
-            newSpan.tag("peer.service", "dogscheduler");
-            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
-            tracer.close(newSpan);          	
-        }
-    	
-    }
-    
-    public List<Owner> getOwnerById(int personId){
-        Span newSpan = tracer.createSpan("getOwnerById");
-        logger.debug("In the personService.getOwnerById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
-    	
-        try {
-        	return ownerRepository.findById(personId);
-        }
-        finally{
-            newSpan.tag("peer.service", "dogscheduler");
-            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
-            tracer.close(newSpan);        	
-        }
-    }
-    
+   public List<SyncData> getAllPersons() {
+      //        Span newSpan = tracer.createSpan("getAllPersons");
+      //        logger.debug("In the personService.getAllPersons() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
 
-    public void refreshOwner(List<Owner> owners, String action){
-        Span newSpan = tracer.createSpan("publishOwnerChange");
-        logger.debug("In the personService.refreshOwner() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
-    	
-    	try {
+      try {
+         return syncDataRepository.findByTransfertAndDomaine("N", "PERSONNE");
+      } finally {
+         //            newSpan.tag("peer.service", "dogscheduler");
+         //            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
+         //            tracer.close(newSpan);        	
+      }
 
-    		if (owners != null && owners.size()>0) {
-	    		switch(action){
-	            	case "U":
-	            		simpleSourceBean.publishOwnerChange("UPDATE", owners);
-	            		break;
-	            	case "I":
-	            		simpleSourceBean.publishOwnerChange("SAVE", owners);
-	            		break;
-	            	case "D":
-	            		simpleSourceBean.publishOwnerChange("DELETE", owners);
-	            		break;
-	                default:
-	                    logger.error("Received an UNKNOWN event from the dog person service of type {}", action);
-	                    break;      
-	    		}
-    		}
-        }
-        finally{
-            newSpan.tag("peer.service", "dogscheduler");
-            newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
-            tracer.close(newSpan);          	
-        }
-    	
-    }
-    
-    public void deletePerson (SyncData person) {
-        try {
-        	syncDataRepository.delete(person);
-        }
-        finally{
-        }
-    }
+   }
+
+   public SyncData savePerson(SyncData person) {
+      Span newSpan = tracer.createSpan("savePerson");
+      logger.debug("In the personService.savePerson() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+
+      try {
+         return syncDataRepository.save(person);
+      } finally {
+         newSpan.tag("peer.service", "dogscheduler");
+         newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
+         tracer.close(newSpan);
+      }
+   }
+
+   public List<Breeder> getBreederById(int personId) {
+      Span newSpan = tracer.createSpan("getBreederById");
+      logger.debug("In the personService.getBreederById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+
+      try {
+         return breederRepository.findById(personId);
+      } finally {
+         newSpan.tag("peer.service", "dogscheduler");
+         newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
+         tracer.close(newSpan);
+      }
+   }
+
+   public void refreshBreeder(List<Breeder> breeders, String action) {
+      Span newSpan = tracer.createSpan("publishBreederChange");
+      logger.debug("In the personService.refreshBreeder() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+
+      try {
+
+         if (breeders != null && breeders.size() > 0) {
+            switch (action) {
+            case "U":
+               simpleSourceBean.publishBreederChange("UPDATE", breeders);
+               break;
+            case "I":
+               simpleSourceBean.publishBreederChange("SAVE", breeders);
+               break;
+            case "D":
+               simpleSourceBean.publishBreederChange("DELETE", breeders);
+               break;
+            default:
+               logger.error("Received an UNKNOWN event from the agria service of type {}", action);
+               break;
+            }
+         }
+      } finally {
+         newSpan.tag("peer.service", "dogscheduler");
+         newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
+         tracer.close(newSpan);
+      }
+
+   }
+
+   public List<Owner> getOwnerById(int personId) {
+      Span newSpan = tracer.createSpan("getOwnerById");
+      logger.debug("In the personService.getOwnerById() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+
+      try {
+         return ownerRepository.findById(personId);
+      } finally {
+         newSpan.tag("peer.service", "dogscheduler");
+         newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
+         tracer.close(newSpan);
+      }
+   }
+
+   public void refreshOwner(List<Owner> owners, String action) {
+      Span newSpan = tracer.createSpan("publishOwnerChange");
+      logger.debug("In the personService.refreshOwner() call, trace id: {}", tracer.getCurrentSpan().traceIdString());
+
+      try {
+
+         if (owners != null && owners.size() > 0) {
+            switch (action) {
+            case "U":
+               simpleSourceBean.publishOwnerChange("UPDATE", owners);
+               break;
+            case "I":
+               simpleSourceBean.publishOwnerChange("SAVE", owners);
+               break;
+            case "D":
+               simpleSourceBean.publishOwnerChange("DELETE", owners);
+               break;
+            default:
+               logger.error("Received an UNKNOWN event from the dog person service of type {}", action);
+               break;
+            }
+         }
+      } finally {
+         newSpan.tag("peer.service", "dogscheduler");
+         newSpan.logEvent(org.springframework.cloud.sleuth.Span.CLIENT_RECV);
+         tracer.close(newSpan);
+      }
+
+   }
+
+   public void deletePerson(SyncData person) {
+      try {
+         syncDataRepository.delete(person);
+      } finally {
+      }
+   }
 }
