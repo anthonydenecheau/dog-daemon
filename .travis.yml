@@ -2,6 +2,7 @@ language: java
 cache:
   directories:
   - "$HOME/.m2"
+dist: trusty  
 jdk:
 - oraclejdk8
 sudo: required
@@ -32,7 +33,14 @@ before_install:
 - sleep 10
 - kafka/bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --create --topic kafka-test-topic
   --partitions 3 --replication-factor 1
-script:
-- sh scripts/travis/tag_build.sh
-- sh scripts/travis/build_services.sh
-- sh scripts/travis/deploy_to_docker_hub.sh
+
+jobs:
+  include:
+  - stage: build and deploy
+    script:
+    - sh scripts/travis/tag_build.sh
+    - sh scripts/travis/build_services.sh
+    - sh scripts/travis/deploy_to_docker_hub.sh
+stages:
+  - name: build and deploy
+    if: branch = master
