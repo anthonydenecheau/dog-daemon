@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.scc.daemon.model.Owner;
 
 @Repository
-public interface OwnerRepository extends CrudRepository<Owner,String>  {
-    public List<Owner> findById(int id);
-    public Owner findByIdDog(int idDog);
+public interface OwnerRepository extends CrudRepository<Owner, String> {
+   public List<Owner> findById(int id);
+
+   public Owner findByIdDog(int idDog);
 }

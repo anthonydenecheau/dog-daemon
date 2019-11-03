@@ -28,150 +28,120 @@ import com.scc.events.models.TitleChangeModel;
 @EnableBinding(CustomChannels.class)
 public class SimpleSourceBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleSourceBean.class);
+   private static final Logger logger = LoggerFactory.getLogger(SimpleSourceBean.class);
 
-    @Autowired
-    private Tracer tracer;
-    
-    @Autowired
-    private CustomChannels customChannels;
+   @Autowired
+   private Tracer tracer;
 
-    @SendTo("outboundBreederChanges")
-    public void publishBreederChange(String action, List<Breeder> breeders){
+   @Autowired
+   private CustomChannels customChannels;
 
-    	Instant instant = Instant.now();
-    	try {
-	       
-    		for (Breeder breeder : breeders) {
-    	        logger.debug("Sending Kafka message {} for Breeder Id: {} at {} ", action, breeder.getId(), instant);
-	    
-    	        BreederChangeModel change =  new BreederChangeModel(
-		    		   BreederChangeModel.class.getTypeName(),
-		                action,
-		                breeder,
-		                tracer.getCurrentSpan().traceIdString(),
-		                instant.toEpochMilli());
-		
-	    		customChannels.outputBreeder().send(MessageBuilder.withPayload(change).build());
-    		}
-        }
-        finally{
-        }
-    	
-    }
+   @SendTo("outboundBreederChanges")
+   public void publishBreederChange(String action, List<Breeder> breeders) {
 
-    @SendTo("outboundOwnerChanges")
-    public void publishOwnerChange(String action, List<Owner> owners){
-    	Instant instant = Instant.now();
+      Instant instant = Instant.now();
+      try {
 
-    	try {
-	       
-    		for (Owner owner : owners) {
-    	        logger.debug("Sending Kafka message {} for Owner Id: {} at {} ", action, owner.getId(), instant);
+         for (Breeder breeder : breeders) {
+            logger.debug("Sending Kafka message {} for Breeder Id: {} at {} ", action, breeder.getId(), instant);
 
-    	        OwnerChangeModel change =  new OwnerChangeModel(
-		    		   OwnerChangeModel.class.getTypeName(),
-		                action,
-		                owner,
-		                tracer.getCurrentSpan().traceIdString(),
-		                instant.toEpochMilli());
-		
-		    	customChannels.outputOwner().send(MessageBuilder.withPayload(change).build());
-    		}
-        }
-        finally{
-        }
-    	
-    }
+            BreederChangeModel change = new BreederChangeModel(BreederChangeModel.class.getTypeName(), action, breeder,
+                  tracer.getCurrentSpan().traceIdString(), instant.toEpochMilli());
 
-    @SendTo("outboundDogChanges")
-    public void publishDogChange(String action, Dog dog){
-    	Instant instant = Instant.now();
-        logger.debug("Sending Kafka message {} for Dog Id: {} at {} ", action, dog.getId(), instant);
+            customChannels.outputBreeder().send(MessageBuilder.withPayload(change).build());
+         }
+      } finally {
+      }
 
-    	try {
-	       
-	    	DogChangeModel change =  new DogChangeModel(
-	    		   DogChangeModel.class.getTypeName(),
-	                action,
-	                dog,
-	                tracer.getCurrentSpan().traceIdString(),
-	                instant.toEpochMilli());
-	
-	    	customChannels.outputDog().send(MessageBuilder.withPayload(change).build());
-    
-        }
-        finally{
-        }
-    	
-    }
-    
-    @SendTo("outboundTitleChanges")
-    public void publishTitleChange(String action, Title title){
-    	Instant instant = Instant.now();
+   }
 
-    	try {
-    		
-	        logger.debug("Sending Kafka message {} for Title Id: {} at {} ", action, title.getId(), instant);
-	        
-	        TitleChangeModel change =  new TitleChangeModel(
-    			TitleChangeModel.class.getTypeName(),
-                action,
-                title,
-                tracer.getCurrentSpan().traceIdString(),
-                instant.toEpochMilli());
+   @SendTo("outboundOwnerChanges")
+   public void publishOwnerChange(String action, List<Owner> owners) {
+      Instant instant = Instant.now();
 
-	        customChannels.outputTitle().send(MessageBuilder.withPayload(change).build());
-    
-        }
-        finally{
-        }
-    	
-    }    
-    
-    @SendTo("outboundPedigreeChanges")
-    public void publishPedigreeChange(String action, Pedigree pedigree){
-    	Instant instant = Instant.now();
+      try {
 
-    	try {
-	       
-	        logger.debug("Sending Kafka message {} for Pedigree Id: {} at {} ", action, pedigree.getId(), instant);
+         for (Owner owner : owners) {
+            logger.debug("Sending Kafka message {} for Owner Id: {} at {} ", action, owner.getId(), instant);
 
-	        PedigreeChangeModel change =  new PedigreeChangeModel(
-	    			PedigreeChangeModel.class.getTypeName(),
-	                action,
-	                pedigree,
-	                tracer.getCurrentSpan().traceIdString(),
-	                instant.toEpochMilli());
-	
-	    	customChannels.outputPedigree().send(MessageBuilder.withPayload(change).build());
-    
-        }
-        finally{
-        }
-    	
-    }
-    
-    @SendTo("outboundParentChanges")
-    public void publishParentChange(String action, Parent parent){
-    	Instant instant = Instant.now();
+            OwnerChangeModel change = new OwnerChangeModel(OwnerChangeModel.class.getTypeName(), action, owner,
+                  tracer.getCurrentSpan().traceIdString(), instant.toEpochMilli());
 
-    	try {
-	       
-	        logger.debug("Sending Kafka message {} for Parent Id: {} at {} ", action, parent.getId(), instant);
+            customChannels.outputOwner().send(MessageBuilder.withPayload(change).build());
+         }
+      } finally {
+      }
 
-	        ParentChangeModel change =  new ParentChangeModel(
-	        		ParentChangeModel.class.getTypeName(),
-	                action,
-	                parent,
-	                tracer.getCurrentSpan().traceIdString(),
-	                instant.toEpochMilli());
-	
-	    	customChannels.outputParent().send(MessageBuilder.withPayload(change).build());
+   }
 
-        }
-        finally{
-        }
-    	
-    }    
+   @SendTo("outboundDogChanges")
+   public void publishDogChange(String action, Dog dog) {
+      Instant instant = Instant.now();
+      logger.debug("Sending Kafka message {} for Dog Id: {} at {} ", action, dog.getId(), instant);
+
+      try {
+
+         DogChangeModel change = new DogChangeModel(DogChangeModel.class.getTypeName(), action, dog,
+               tracer.getCurrentSpan().traceIdString(), instant.toEpochMilli());
+
+         customChannels.outputDog().send(MessageBuilder.withPayload(change).build());
+
+      } finally {
+      }
+
+   }
+
+   @SendTo("outboundTitleChanges")
+   public void publishTitleChange(String action, Title title) {
+      Instant instant = Instant.now();
+
+      try {
+
+         logger.debug("Sending Kafka message {} for Title Id: {} at {} ", action, title.getId(), instant);
+
+         TitleChangeModel change = new TitleChangeModel(TitleChangeModel.class.getTypeName(), action, title,
+               tracer.getCurrentSpan().traceIdString(), instant.toEpochMilli());
+
+         customChannels.outputTitle().send(MessageBuilder.withPayload(change).build());
+
+      } finally {
+      }
+
+   }
+
+   @SendTo("outboundPedigreeChanges")
+   public void publishPedigreeChange(String action, Pedigree pedigree) {
+      Instant instant = Instant.now();
+
+      try {
+
+         logger.debug("Sending Kafka message {} for Pedigree Id: {} at {} ", action, pedigree.getId(), instant);
+
+         PedigreeChangeModel change = new PedigreeChangeModel(PedigreeChangeModel.class.getTypeName(), action, pedigree,
+               tracer.getCurrentSpan().traceIdString(), instant.toEpochMilli());
+
+         customChannels.outputPedigree().send(MessageBuilder.withPayload(change).build());
+
+      } finally {
+      }
+
+   }
+
+   @SendTo("outboundParentChanges")
+   public void publishParentChange(String action, Parent parent) {
+      Instant instant = Instant.now();
+
+      try {
+
+         logger.debug("Sending Kafka message {} for Parent Id: {} at {} ", action, parent.getId(), instant);
+
+         ParentChangeModel change = new ParentChangeModel(ParentChangeModel.class.getTypeName(), action, parent,
+               tracer.getCurrentSpan().traceIdString(), instant.toEpochMilli());
+
+         customChannels.outputParent().send(MessageBuilder.withPayload(change).build());
+
+      } finally {
+      }
+
+   }
 }
