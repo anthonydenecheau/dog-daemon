@@ -25,6 +25,9 @@ public class Dog {
    @Column(name = "date_naissance")
    private String dateNaissance;
 
+   @Column(name = "date_deces")
+   private String dateDeces;
+
    @Column(name = "pays")
    private String pays;
 
@@ -108,6 +111,14 @@ public class Dog {
 
    public void setDateNaissance(String dateNaissance) {
       this.dateNaissance = dateNaissance;
+   }
+
+   public String getDateDeces() {
+      return dateDeces;
+   }
+
+   public void setDateDeces(String dateDeces) {
+      this.dateDeces = dateDeces;
    }
 
    public String getPays() {
@@ -252,6 +263,11 @@ public class Dog {
 
    public Dog withDateNaissance(String dateNaissance) {
       this.setDateNaissance(dateNaissance);
+      return this;
+   }
+
+   public Dog withDateDeces(String dateDeces) {
+      this.setDateDeces(dateDeces);
       return this;
    }
 
